@@ -49,9 +49,21 @@ public class Graphe {
 		if(this.A.size() > 0) {
 			System.out.println("liste des Arc : ");
 			for(int i=0; i<this.A.size(); i++) {
-				if(this.A.get(i).is_A == true)
+				if(this.A.get(i).is_A == true){
 					System.out.println("origine : "+this.A.get(i).origine.nom+" -> "+this.A.get(i).fin.nom + " relation : " +this.A.get(i).origine.nom + " est un "+this.A.get(i).fin.nom );
+				}
 
+				else{
+					if (this.A.get(i).est_Ami == true){
+						System.out.println("origine : "+this.A.get(i).origine.nom+" -> "+this.A.get(i).fin.nom + " relation : " +this.A.get(i).origine.nom + " a pour ami "+this.A.get(i).fin.nom );
+					}
+					else {
+						System.out.println(this.A.get(i).est_Ami);
+						System.out.println(this.A.get(i).is_A);
+						System.out.println("origine : "+this.A.get(i).origine.nom+" -> "+this.A.get(i).fin.nom + " aucune relation particulière" );
+					}
+
+				}
 
 			}
 		}else {

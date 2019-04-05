@@ -55,10 +55,10 @@ public class Main {
 					Sommet noeud1 = graphe.selectionnerSommet();
 					Sommet noeud2 = graphe.selectionnerSommet();
 					graphe.A.add(nouveauArc = new Arc(noeud1, noeud2));
-					if (noeud1.type.equals("instance") && noeud2.type.equals("instance")) {
+					if (noeud1.type.equals("i") && noeud2.type.equals("i")) {
 						nouveauArc.est_Ami = true;
 					}
-					if (noeud1.type.equals("instance") && noeud2.type.equals("concept")) {
+					if (noeud1.type.equals("i") && noeud2.type.equals("c")) {
 						nouveauArc.is_A = true;
 					}
 					System.out.println("arc ajouté");
