@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Sommet {
     public String nom;
     public String adresse;

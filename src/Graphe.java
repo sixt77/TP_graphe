@@ -13,7 +13,7 @@ public class Graphe {
 		}else {
 			System.out.println("ce noeud existe déja");
 		}
-		System.out.println(this.G.size());
+
 
 	}
 	public void ajouterArc(Arc arc) {
@@ -58,8 +58,7 @@ public class Graphe {
 						System.out.println("origine : "+this.A.get(i).origine.nom+" -> "+this.A.get(i).fin.nom + " relation : " +this.A.get(i).origine.nom + " a pour ami "+this.A.get(i).fin.nom );
 					}
 					else {
-						System.out.println(this.A.get(i).est_Ami);
-						System.out.println(this.A.get(i).is_A);
+
 						System.out.println("origine : "+this.A.get(i).origine.nom+" -> "+this.A.get(i).fin.nom + " aucune relation particulière" );
 					}
 
@@ -87,6 +86,18 @@ public class Graphe {
 		}
 		return noeud1;
 	}
+
+    public void setAttribut(){
+	    int indice;
+        String nom;
+        Scanner sc = new Scanner(System.in);
+        System.out.println(" quel sommet ?");
+        nom = sc.nextLine();
+        indice = chercherSommet(nom);
+        System.out.println("");
+
+    }
+
 	public int chercherChemin(Sommet noeud1, Sommet noeud2) {
 		return 0;
 
