@@ -82,6 +82,16 @@ public class Main {
 						System.out.println("arc non trouv�");
 					}
 					break;
+
+				case 6:
+					Sommet sommet5 = graphe.selectionnerSommet();
+					Sommet sommet6 = graphe.selectionnerSommet();
+					if(graphe.parcoursLargeur(sommet5, sommet6)){
+						System.out.println("arc trouvé");
+					}else {
+						System.out.println("arc non trouvé");
+					}
+					break;
 				case 7:
 					fin = true;
 					System.out.println("aurevoir");
