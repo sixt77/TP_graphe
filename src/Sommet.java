@@ -1,24 +1,17 @@
 import java.util.Scanner;
 
 public class Sommet {
-    public String nom;
-    public String adresse;
+    public String valeur;
     public String type;
-    public int age;
 
 
     public Sommet() {
-        this.nom = null;
-        this.type = null;
-        this.adresse = null;
-        this.age = 0;
+        this.valeur = null;
 
     }
-    public Sommet(String nom,String type) {
-        this.nom = nom;
+    public Sommet(String valeur, String type) {
+        this.valeur = valeur;
         this.type = type;
-        this.age = 0;
-        this.adresse = null;
     }
 
 

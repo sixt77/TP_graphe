@@ -6,17 +6,18 @@ public class Main {
 
 	public static void main(String[] args) {
 		Boolean fin = false;
-		Boolean choixtype = false;
 		Graphe graphe = new Graphe();
 
 		while (!fin) {
 			System.out.println(" Commandes :");
 			System.out.println("1- creer noeud");
 			System.out.println("2- creer arc");
-			System.out.println("3- afficher liste sommet");
-			System.out.println("4- afficher liste arc");
-			System.out.println("5- existe chemin entre 2 sommet");
-			System.out.println("7- finir");
+			System.out.println("3- ajouter attribut");
+			System.out.println("4- afficher liste sommet");
+			System.out.println("5- afficher liste arc");
+			System.out.println("6- afficher attribut d'un sommet");
+			System.out.println("7- liste des attributs");
+			System.out.println("8- finir");
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Veuillez saisir votre choix :");
 			int value = sc.nextInt();
@@ -26,73 +27,70 @@ public class Main {
 					Sommet nouveau;
 					System.out.println("Veuillez saisir un nom :");
 					String nom = sc2.nextLine();
-					System.out.println("Veuillez saisir un type :(instance ou concept 'i' ou 'c') ");
-					String type = sc2.nextLine();
-					while (!choixtype){
-						if(type.equals("i") || type.equals("c")){
-							choixtype = true;
-						}else{
-							System.out.println("VEUILLEZ SAISIR 'i' OU 'c'");
-							type = sc2.nextLine();
-						}
-					}
-
-					System.out.println("Voulez vous ajouter plus d'information sur votre noeud (oui/non) ?");
-					String choix = sc2.nextLine();
-					graphe.ajouterSommet(nouveau = new Sommet(nom, type));
-					if (choix.equals("oui")) {
-						System.out.println("Veuillez saisir une adresse ");
-						String adresse = sc2.nextLine();
-						System.out.println("Veuillez saisir un age ");
-						int age = sc2.nextInt();
-						nouveau.adresse = adresse;
-						nouveau.age = age;
-					}
+					graphe.ajouterSommet(nouveau = new Sommet(nom, "noeud"));
 					break;
 
 				case 2:
 					Arc nouveauArc;
 					Sommet noeud1 = graphe.selectionnerSommet();
 					Sommet noeud2 = graphe.selectionnerSommet();
-					graphe.A.add(nouveauArc = new Arc(noeud1, noeud2));
-					if (noeud1.type.equals("i") && noeud2.type.equals("i")) {
-						nouveauArc.est_Ami = true;
+					Scanner sc3 = new Scanner(System.in);
+					System.out.println("Veuillez saisir un type, 1 pour héritage, 2 pour amitié :");
+					int number = sc3.nextInt();
+					if(number == 1){
+						graphe.A.add(nouveauArc = new Arc(noeud1, noeud2, "is_a"));
+						if(graphe.checkLoop(noeud1) ||graphe.checkLoop(noeud2)){
+							System.out.println("une boucle a été détécter, vous ne pouvez pas ajouter cet arc");
+							graphe.A.remove(nouveauArc);
+						}else{
+							System.out.println("arc ajouté");
+						}
 					}
-					if (noeud1.type.equals("i") && noeud2.type.equals("c")) {
-						nouveauArc.is_A = true;
+					if(number == 2){
+						graphe.A.add(nouveauArc = new Arc(noeud1, noeud2, "friend"));
 					}
-					System.out.println("arc ajouté");
+
+
+
 
 					break;
 
 				case 3:
+					Sommet S1 = graphe.selectionnerSommet();
+					Scanner sc4 = new Scanner(System.in);
+					System.out.println("Veuillez saisir le type de d'attribut");
+					String type = sc4.nextLine();
+					if(graphe.attributExists(S1, type)){
+						System.out.println("l'attribut existe déja");
+
+					}else{
+						Scanner sc5 = new Scanner(System.in);
+						System.out.println("Veuillez saisir la valeur de d'attribut");
+						String valeur = sc5.nextLine();
+						graphe.ajouterSommet(nouveau = new Sommet(valeur, "attribut"));
+						graphe.A.add(nouveauArc = new Arc(S1, nouveau, "attribut", type));
+					}
+
+					break;
+				case 4:
 					graphe.afficherListeSommet();
 					break;
 
-				case 4:
+				case 5:
 					graphe.afficherListeArc();
 					break;
 
-				case 5:
+				case 6:
 					Sommet noeud3 = graphe.selectionnerSommet();
-					Sommet noeud4 = graphe.selectionnerSommet();
-					if (graphe.propagation(noeud3, noeud4)) {
-						System.out.println("arc trouv�");
-					} else {
-						System.out.println("arc non trouv�");
-					}
+					graphe.afficherListeAttribut(noeud3);
 					break;
 
-				case 6:
-					Sommet sommet5 = graphe.selectionnerSommet();
-					Sommet sommet6 = graphe.selectionnerSommet();
-					if(graphe.parcoursLargeur(sommet5, sommet6)){
-						System.out.println("arc trouvé");
-					}else {
-						System.out.println("arc non trouvé");
-					}
-					break;
 				case 7:
+					Sommet sommet5 = graphe.selectionnerSommet();
+					graphe.displayAllAttribut(graphe.findAllParent(sommet5));
+
+					break;
+				case 8:
 					fin = true;
 					System.out.println("aurevoir");
 					break;
