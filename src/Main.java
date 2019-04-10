@@ -18,6 +18,7 @@ public class Main {
 			System.out.println("6- afficher attribut d'un sommet");
 			System.out.println("7- liste des attributs");
 			System.out.println("8- finir");
+			System.out.println("9- supprimer noeud");
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Veuillez saisir votre choix :");
 			int value = sc.nextInt();
@@ -93,6 +94,10 @@ public class Main {
 				case 8:
 					fin = true;
 					System.out.println("aurevoir");
+					break;
+				case 9:
+					Sommet sommet6 = graphe.selectionnerSommet();
+					graphe.effaceSommet(sommet6);
 					break;
 
 				default:

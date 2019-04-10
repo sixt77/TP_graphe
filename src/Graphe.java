@@ -195,19 +195,7 @@ public class Graphe {
 		return liste3;
 	}
 
-	public int lemmeDeKoening(Sommet sommet1, Sommet sommet2) {
-		ArrayList<Sommet> listSommet = null;
-		ArrayList<Sommet> listNouveauSommet = null;
-		listSommet.add(sommet1);
-		listNouveauSommet.add(sommet1);
-		while(listSommet.indexOf(sommet2) == -1) {
-			for(int i=0; i<listNouveauSommet.size(); i++) {
-				listNouveauSommet = this.chercherVoisin(listNouveauSommet.get(i), listSommet);
-			}
 
-		}
-		return 0;
-	}
 	public boolean cheminEntre2Sommet(Sommet sommet1, Sommet sommet2) {
 		boolean find = false;
 		for(int i=0; i<this.A.size(); i++) {
@@ -410,6 +398,28 @@ public class Graphe {
 	public void printList(ArrayList<Sommet> liste1){
 		for(int i = 0; i <liste1.size(); i++){
 			System.out.println("sommet "+i+" :"+liste1.get(i).valeur);
+		}
+	}
+	public void effaceSommet(Sommet sommet1){
+		boolean delete;
+		System.out.println("nb arc : "+this.A.size());
+		for(int i = 0; i <this.A.size(); i++){
+			delete = false;
+			if(this.A.get(i).origine.valeur.equals(sommet1.valeur)){
+				delete = true;
+			}
+			if(this.A.get(i).fin.valeur.equals(sommet1.valeur)){
+				delete = true;
+			}
+			if(delete){
+				this.A.remove(this.A.get(i));
+				i = i-1;
+			}
+		}
+		for(int i = 0; i <this.G.size(); i++){
+			if(this.G.get(i).valeur.equals(sommet1.valeur)){
+				this.G.remove(i);
+			}
 		}
 	}
 
